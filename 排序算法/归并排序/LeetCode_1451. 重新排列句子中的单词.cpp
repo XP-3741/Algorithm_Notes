@@ -35,6 +35,7 @@ public:
         return result;
     }
 
+    // 归并排序详解见 "LeetCode_2165. 重排数字的最小值.cpp"
     void MERGE(vector<vector<int>>& A,int p,int q,int r)
     {
         int n1=q-p+1;
