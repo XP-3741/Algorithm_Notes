@@ -38,19 +38,22 @@ public:
         return vector<int>{mi, mx};
     }
     
-    // 堆排序详解见
+    // 堆排序详解见 "LeetCode_1481. 不同整数的最少数目.cpp"
     int PARENT(int i)
     {
         return i/2;
     }
+  
     int LEFT(int i)
     {
         return 2*i;
     }
+  
     int RIGHT(int i)
     {
         return 2*i+1;
     }
+  
     void MAX_HEAPIFY(vector<int>& A,int i)
     {
         int l=LEFT(i+1)-1;
@@ -67,12 +70,14 @@ public:
             MAX_HEAPIFY(A,largest);
         }
     }
+  
     void BUILD_MAX_HEAP(vector<int>& A)
     {
         heap_size=A.size();
         for(int i=A.size()/2-1;i>=0;i--)
             MAX_HEAPIFY(A,i);
     }
+  
     void HEAPSORT(vector<int>& A)
     {
         BUILD_MAX_HEAP(A);
