@@ -5,6 +5,11 @@
     返回 承载所有人所需的最小船数 。
 */
 
+/*
+  总结：
+    双指针的使用
+*/
+
 class Solution {
 private:
     int heap_size=0;
@@ -33,6 +38,8 @@ public:
         return sums;        // 返回所需最小船数
     }  
 
+  
+    // 堆排序详解见 "LeetCode_1481. 不同整数的最少数目.cpp"
     int PARENT(int i)
     {
         return i/2;
