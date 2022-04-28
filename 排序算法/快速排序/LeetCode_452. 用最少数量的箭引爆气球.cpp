@@ -39,7 +39,7 @@ public:
         return sum;                         // 返回最小弓箭数
     }
 
-    // 快速排序详解见 ""
+    // 快速排序详解见 "LeetCode_2126. 摧毁小行星.cpp"
     int PARTITION(vector<vector<int>>& A, int p, int r)
     {
 	    int x = A[r][1];
