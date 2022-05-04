@@ -9,6 +9,9 @@
     n == stones.length
     2 <= n <= 1000
     1 <= stones[i] <= 1000
+    
+  链接：
+    https://leetcode-cn.com/problems/stone-game-vii/
 */
 
 /*
