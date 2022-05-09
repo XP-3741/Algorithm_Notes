@@ -11,6 +11,9 @@
     1 <= clips.length <= 100
     0 <= starti <= endi <= 100
     1 <= time <= 100
+    
+  链接：
+    https://leetcode.cn/problems/video-stitching/
 */
 
 /*
