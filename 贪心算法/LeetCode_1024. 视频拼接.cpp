@@ -21,6 +21,10 @@
       与《算法导论》的 ‘16.1 活动选择问题’ 思想相同，方法相反
       本题是以开始时间为关键字排序，并且求取满足要求的最长片段
       《算法导论》的是以结尾时间为关键字排序，并且求取满足要求的最短片段
+      
+      官方解答，牛逼
+      只要又满足的片段组合，[0..time] 作为开始时间的片段(可剪辑)必存在
+      所以遍历 time 次即可
 */
 
 class Solution {
@@ -55,6 +59,34 @@ public:
             if(pre_end >= time) return counts;  // 检查是否已满足 time 要求
         }
         if(pre_end < time)  return -1;  // 当满足的最长片段未能达到 time 要求
+        return counts;
+    }
+};
+
+// 官方解答
+class Solution {
+public:
+    int videoStitching(vector<vector<int>>& clips, int time) {
+        vector<int>maxn(time);          // 下标代表视频开始时间，记录对应的最长结束时间
+        for(vector<int>& it: clips)     // 初始化 maxn
+            if(it[0] < time)
+                maxn[it[0]] = max(maxn[it[0]], it[1]);
+
+        int last = 0;       // 当前片段和上一片段结束时间的较大值
+        int pre = 0;        // 上一片段的结束时间
+        int counts = 0;     // 所需片段数量
+
+        for(int i = 0; i < time; i++){
+            last = max(maxn[i], last);
+
+            if(i == last)   // 当开始时间等于结束时间，表示无法衔接
+                return -1;
+
+            if(i == pre){   // 当到达上一最长时间片段结尾
+                counts++;   // 片段数加 1
+                pre = last; // 上一最长时间片段结束时间赋值为当前片段结束时间
+            }
+        }
         return counts;
     }
 };
