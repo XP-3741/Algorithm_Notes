@@ -9,6 +9,11 @@
     https://leetcode.cn/problems/jump-game-ii/
 */
 
+/*
+   总结：
+    画出递归流程图寻找 dp
+*/
+
 class Solution {
 public:
     int jump(vector<int>& nums) {
