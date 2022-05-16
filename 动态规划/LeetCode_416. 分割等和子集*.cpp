@@ -80,7 +80,7 @@ public:
             sum += num;
             maxNum = max(maxNum, num);
         }
-        if (sum & 1) {      // 是否为偶数，即 二进制 最后一位是否为 0， 与 1 按位与
+        if (sum & 1) {                  // 是否为偶数，即 二进制 最后一位是否为 0， 与 1 按位与
             return false;
         }
         int target = sum / 2;
@@ -93,6 +93,10 @@ public:
         dp[0] = true;
         for (int i = 0; i < n; i++) {
             int num = nums[i];
+                                        // 且需要注意的是第二层的循环我们需要从大到小计算
+                                        // 因为如果我们从小到大更新 dp 值
+                                        // 那么在计算 dp[j] 值的时候，dp[j-nums[i]] 已经是被更新过的状态
+                                        // 不再是上一行的 dp 值
             for (int j = target; j >= num; --j) {
                 dp[j] |= dp[j - num];
             }
