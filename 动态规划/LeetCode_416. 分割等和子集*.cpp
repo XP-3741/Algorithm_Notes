@@ -20,7 +20,11 @@
     递推式：
                     -- dp[i-1][j] | dp[i-1][j-nums[i]]   , nums[i] <= j
     dp[i][j] =  -- |
-                    -- dp[i-1][j]                        , nums[i] > j          
+                    -- dp[i-1][j]                        , nums[i] > j
+    
+    优化后的递推式：
+    
+    dp[j] = dp[j] | dp[j-1]
 */
 
 // 官方解答
@@ -60,5 +64,39 @@ public:
                                                 // 或 dp[i-1][j]   (选nums[i])
             }
         return dp[nums.size()-1][target];       // 返回结果
+    }
+};
+
+// 官方解答
+class Solution {
+public:
+    bool canPartition(vector<int>& nums) {
+        int n = nums.size();
+        if (n < 2) {
+            return false;
+        }
+        int sum = 0, maxNum = 0;
+        for (auto& num : nums) {
+            sum += num;
+            maxNum = max(maxNum, num);
+        }
+        if (sum & 1) {      // 是否为偶数，即 二进制 最后一位是否为 0， 与 1 按位与
+            return false;
+        }
+        int target = sum / 2;
+        if (maxNum > target) {
+            return false;
+        }
+        vector<int> dp(target + 1, 0);  // 发现在计算 dp 的过程中，每一行的 dp 值都只与上一行的 dp 值有关
+                                        // 因此只需要一个一维数组即可将空间复杂度降到 O(target)
+                                        // 此时的转移方程为 dp[j] = dp[j] | dp[j-1]
+        dp[0] = true;
+        for (int i = 0; i < n; i++) {
+            int num = nums[i];
+            for (int j = target; j >= num; --j) {
+                dp[j] |= dp[j - num];
+            }
+        }
+        return dp[target];
     }
 };
